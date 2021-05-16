@@ -265,6 +265,7 @@
     
     <div class="post-body" itemprop="articleBody">
           
+
       
     </div>
 
@@ -321,7 +322,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-16 15:32:31" itemprop="dateModified" datetime="2021-05-16T15:32:31+08:00">2021-05-16</time>
+        <time title="Modified: 2021-05-16 18:55:55" itemprop="dateModified" datetime="2021-05-16T18:55:55+08:00">2021-05-16</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -343,47 +344,103 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="I-基本类型"><a href="#I-基本类型" class="headerlink" title="I. 基本类型"></a>I. 基本类型</h2><table>
+          <h2 id="i.-基本类型">I. 基本类型</h2>
+<table>
 <thead>
-<tr>
-<th align="left"></th>
-<th align="center">Kotlin</th>
-<th align="center">Java</th>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Kotlin</th>
+<th style="text-align: center;">Java</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">字节</td>
-<td align="center">Byte</td>
-<td align="center">byte / Byte</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">字节</td>
+<td style="text-align: center;">Byte</td>
+<td style="text-align: center;">byte / Byte</td>
 </tr>
-<tr>
-<td align="left">整型</td>
-<td align="center">Int &amp; Long</td>
-<td align="center">int / Integer &amp; long / Long</td>
+<tr class="even">
+<td style="text-align: left;">整型</td>
+<td style="text-align: center;">Int &amp; Long</td>
+<td style="text-align: center;">int / Integer &amp; long / Long</td>
 </tr>
-<tr>
-<td align="left">浮点型</td>
-<td align="center">Float &amp; Double</td>
-<td align="center">float / Float &amp; double / Double</td>
+<tr class="odd">
+<td style="text-align: left;">浮点型</td>
+<td style="text-align: center;">Float &amp; Double</td>
+<td style="text-align: center;">float / Float &amp; double / Double</td>
 </tr>
-<tr>
-<td align="left">字符</td>
-<td align="center">Char</td>
-<td align="center">char / Character</td>
+<tr class="even">
+<td style="text-align: left;">字符</td>
+<td style="text-align: center;">Char</td>
+<td style="text-align: center;">char / Character</td>
 </tr>
-<tr>
-<td align="left">字符串</td>
-<td align="center">String</td>
-<td align="center">String</td>
+<tr class="odd">
+<td style="text-align: left;">字符串</td>
+<td style="text-align: center;">String</td>
+<td style="text-align: center;">String</td>
 </tr>
-</tbody></table>
-<ol>
-<li>val &amp; var<br>val: 只读变量，等同于Java中 final变量，初始化后不可修改<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val str: String &#x3D; &quot;Hello World&quot; (kotlin)</span><br><span class="line">final String str &#x3D; &quot;Hello World&quot; (Java)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>var: 可读写变量， 和Java中的大部分变量一样<br>   ‘’’var num: Int = 2 (kotlin)<br>   int num = 2 (Java)<br>   ‘’’</p>
-<p><em>kotlin类型自动推导：在kotlin中声明变量可省略类型 ‘: String’ ，kotlin会根据声明的值进行自动推导）</em></p>
-<h2 id="II-数组"><a href="#II-数组" class="headerlink" title="II. 数组"></a>II. 数组</h2><h2 id="III-区间"><a href="#III-区间" class="headerlink" title="III. 区间"></a>III. 区间</h2><h2 id="IV-集合"><a href="#IV-集合" class="headerlink" title="IV. 集合"></a>IV. 集合</h2><p><strong>V. Pair &amp; Triple</strong></p>
-<p><strong>VI. 函数</strong></p>
+</tbody>
+</table>
+<h3 id="val-var">1. val &amp; var</h3>
+<p>val: 只读变量，等同于Java中 final变量，初始化后不可修改 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val str: String &#x3D; &quot;Hello World&quot; &#x2F;&#x2F; kotlin</span><br><span class="line">final String str &#x3D; &quot;Hello World&quot; &#x2F;&#x2F; Java</span><br></pre></td></tr></table></figure></p>
+<p>var: 可读写变量， 和Java中的大部分变量一样 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num: Int &#x3D; 2 &#x2F;&#x2F; kotlin</span><br><span class="line">int num &#x3D; 2 &#x2F;&#x2F; Java</span><br></pre></td></tr></table></figure></p>
+<p><em>kotlin类型自动推导：在kotlin中声明变量可省略类型 <code>: String</code> ，kotlin会根据声明的值进行自动推导）</em></p>
+<h3 id="long-类型">2. Long 类型</h3>
+<p>Java中数字结尾为 <code>L / l</code> 都可以编译，但在kotlin中 <code>l</code> 会编译错误</p>
+<h3 id="数值类型转换">3. 数值类型转换</h3>
+<p>Kotlin中，隐式类型转换是不被允许的 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">int</span> e = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">long</span> f = e; <span class="comment">//隐式转换</span></span><br></pre></td></tr></table></figure> <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kotlin</span></span><br><span class="line"><span class="keyword">val</span> e: <span class="built_in">Int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e <span class="comment">// 编译错误</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e.toLong() <span class="comment">// 正确写法</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="无符号类型可兼容c语言">4. 无符号类型（可兼容C语言）</h3>
+<p>无符号类型只能表示非负数，范围为对应有符号类型的二倍(bit位数一样，去掉负数占用的位置)<br />
+Int: <span class="math inline">\(-2^{31}\)</span> ~ <span class="math inline">\(2^{31} - 1\)</span><br />
+UInt: 0 ~ <span class="math inline">\(2^{32} - 1\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">有符号</th>
+<th style="text-align: center;">无符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">字节</td>
+<td style="text-align: center;">Byte</td>
+<td style="text-align: center;">UByte</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">短整型</td>
+<td style="text-align: center;">Short</td>
+<td style="text-align: center;">UShort</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">整型</td>
+<td style="text-align: center;">Int</td>
+<td style="text-align: center;">UInt</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">长整型</td>
+<td style="text-align: center;">Long</td>
+<td style="text-align: center;">ULong</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">字符串</td>
+<td style="text-align: center;">String</td>
+<td style="text-align: center;">String</td>
+</tr>
+</tbody>
+</table>
+<p><em>无符号类型 不能声明为负数</em></p>
+<h3 id="string">5. String</h3>
+<p>kotlin中使用 字符串模板，不需要像Java一样用 "+" 拼接 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(<span class="string">&quot;value of string &#x27;b&#x27; is: <span class="variable">$b</span>, length of string &#x27;b&#x27; is <span class="subst">$&#123;b.length&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure> kotlin 中 双等号<code>==</code>比较两个字符串的值， 三等号<code>===</code>比较两个字符串的引用（即Kotlin中<code>===</code> 和JAVA中的<code>==</code>作用一致） <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s1 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line"><span class="keyword">val</span> s2 = String(<span class="string">&quot;Hello&quot;</span>.toCharArray())</span><br><span class="line"></span><br><span class="line">println(s1 == s2) <span class="comment">// true</span></span><br><span class="line">println(s1 === s2) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="raw-string">6. Raw String</h3>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    内容</span></span><br><span class="line"><span class="string">     行1</span></span><br><span class="line"><span class="string">      行2</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>.trimIndent())</span><br></pre></td></tr></table></figure>
+<p>打印出来的格式会和直接输入进去的格式一模一样，所有的空格 &amp; 变量都会包含<br />
+<code>trimIndent()</code>用于把前面的公共空格消掉</p>
+<h2 id="ii.-数组">II. 数组</h2>
+<h2 id="iii.-区间">III. 区间</h2>
+<h2 id="iv.-集合">IV. 集合</h2>
+<h2 id="v.-pair-triple">V. Pair &amp; Triple</h2>
+<h2 id="vi.-函数">VI. 函数</h2>
 
       
     </div>
@@ -460,6 +517,39 @@
   
 
 
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 

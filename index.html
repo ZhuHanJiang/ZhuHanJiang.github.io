@@ -71,9 +71,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-kotlin-total" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-kotlin-ii" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/04/26/kotlin-total/" class="article-date">
+    <a href="/2021/04/26/kotlin-ii/" class="article-date">
   <time class="dt-published" datetime="2021-04-26T06:56:18.000Z" itemprop="datePublished">2021-04-26</time>
 </a>
     
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/26/kotlin-total/">Kotlin 学习笔记</a>
+      <a class="p-name article-title" href="/2021/04/26/kotlin-ii/">Kotlin 学习笔记（2）--</a>
     </h1>
   
 
@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhuhanjiang.github.io/2021/04/26/kotlin-total/" data-id="ckos1hg88000b6odxffkk4rtl" data-title="Kotlin 学习笔记" class="article-share-link">Share</a>
+      <a data-url="http://zhuhanjiang.github.io/2021/04/26/kotlin-ii/" data-id="ckos1wahs0001bkdx5kzme2q9" data-title="Kotlin 学习笔记（2）--" class="article-share-link">Share</a>
       
       
       
@@ -137,96 +137,97 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="I-基本类型"><a href="#I-基本类型" class="headerlink" title="I. 基本类型"></a>I. 基本类型</h2><table>
+        <h2 id="I-基本类型"><a href="#I-基本类型" class="headerlink" title="I. 基本类型"></a>I. 基本类型</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="left"></th>
-<th align="center">Kotlin</th>
-<th align="center">Java</th>
+<th style="text-align:left"></th>
+<th style="text-align:center">Kotlin</th>
+<th style="text-align:center">Java</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">字节</td>
-<td align="center">Byte</td>
-<td align="center">byte / Byte</td>
+<tbody>
+<tr>
+<td style="text-align:left">字节</td>
+<td style="text-align:center">Byte</td>
+<td style="text-align:center">byte / Byte</td>
 </tr>
 <tr>
-<td align="left">整型</td>
-<td align="center">Int &amp; Long</td>
-<td align="center">int / Integer &amp; long / Long</td>
+<td style="text-align:left">整型</td>
+<td style="text-align:center">Int &amp; Long</td>
+<td style="text-align:center">int / Integer &amp; long / Long</td>
 </tr>
 <tr>
-<td align="left">浮点型</td>
-<td align="center">Float &amp; Double</td>
-<td align="center">float / Float &amp; double / Double</td>
+<td style="text-align:left">浮点型</td>
+<td style="text-align:center">Float &amp; Double</td>
+<td style="text-align:center">float / Float &amp; double / Double</td>
 </tr>
 <tr>
-<td align="left">字符</td>
-<td align="center">Char</td>
-<td align="center">char / Character</td>
+<td style="text-align:left">字符</td>
+<td style="text-align:center">Char</td>
+<td style="text-align:center">char / Character</td>
 </tr>
 <tr>
-<td align="left">字符串</td>
-<td align="center">String</td>
-<td align="center">String</td>
+<td style="text-align:left">字符串</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">String</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="1-val-amp-var"><a href="#1-val-amp-var" class="headerlink" title="1. val &amp; var"></a>1. val &amp; var</h3><p>val: 只读变量，等同于Java中 final变量，初始化后不可修改<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val str: String = &quot;Hello World&quot; // kotlin</span><br><span class="line">final String str = &quot;Hello World&quot; // Java</span><br></pre></td></tr></table></figure></p>
 <p>var: 可读写变量， 和Java中的大部分变量一样<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num: Int = 2 // kotlin</span><br><span class="line">int num = 2 // Java</span><br></pre></td></tr></table></figure></p>
 <p><em>kotlin类型自动推导：在kotlin中声明变量可省略类型 <code>: String</code> ，kotlin会根据声明的值进行自动推导）</em></p>
 <h3 id="2-Long-类型"><a href="#2-Long-类型" class="headerlink" title="2. Long 类型"></a>2. Long 类型</h3><p>Java中数字结尾为 <code>L / l</code> 都可以编译，但在kotlin中 <code>l</code> 会编译错误</p>
-<h3 id="3-数值类型转换"><a href="#3-数值类型转换" class="headerlink" title="3. 数值类型转换"></a>3. 数值类型转换</h3><p>Kotlin中，隐式类型转换是不被允许的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">int</span> e = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">long</span> f = e; <span class="comment">//隐式转换</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kotlin</span></span><br><span class="line"><span class="keyword">val</span> e: <span class="built_in">Int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e <span class="comment">// 编译错误</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e.toLong() <span class="comment">// 正确写法</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-无符号类型（可兼容C语言）"><a href="#4-无符号类型（可兼容C语言）" class="headerlink" title="4. 无符号类型（可兼容C语言）"></a>4. 无符号类型（可兼容C语言）</h3><p>无符号类型只能表示非负数，范围为对应有符号类型的二倍(bit位数一样，去掉负数占用的位置)<br>Int: $-2^{31}$ ~ $2^{31} - 1$<br>UInt: 0 ~ $2^{32} - 1$</p>
+<h3 id="3-数值类型转换"><a href="#3-数值类型转换" class="headerlink" title="3. 数值类型转换"></a>3. 数值类型转换</h3><p>Kotlin中，隐式类型转换是不被允许的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">int</span> e = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">long</span> f = e; <span class="comment">//隐式转换</span></span><br></pre></td></tr></table></figure><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kotlin</span></span><br><span class="line"><span class="keyword">val</span> e: <span class="built_in">Int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e <span class="comment">// 编译错误</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e.toLong() <span class="comment">// 正确写法</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="4-无符号类型（可兼容C语言）"><a href="#4-无符号类型（可兼容C语言）" class="headerlink" title="4. 无符号类型（可兼容C语言）"></a>4. 无符号类型（可兼容C语言）</h3><p>无符号类型只能表示非负数，范围为对应有符号类型的二倍(bit位数一样，去掉负数占用的位置)\<br>Int: $-2^{31}$ ~ $2^{31} - 1$\<br>UInt: 0 ~ $2^{32} - 1$</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left"></th>
-<th align="center">有符号</th>
-<th align="center">无符号</th>
+<th style="text-align:left"></th>
+<th style="text-align:center">有符号</th>
+<th style="text-align:center">无符号</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">字节</td>
-<td align="center">Byte</td>
-<td align="center">UByte</td>
+<tbody>
+<tr>
+<td style="text-align:left">字节</td>
+<td style="text-align:center">Byte</td>
+<td style="text-align:center">UByte</td>
 </tr>
 <tr>
-<td align="left">短整型</td>
-<td align="center">Short</td>
-<td align="center">UShort</td>
+<td style="text-align:left">短整型</td>
+<td style="text-align:center">Short</td>
+<td style="text-align:center">UShort</td>
 </tr>
 <tr>
-<td align="left">整型</td>
-<td align="center">Int</td>
-<td align="center">UInt</td>
+<td style="text-align:left">整型</td>
+<td style="text-align:center">Int</td>
+<td style="text-align:center">UInt</td>
 </tr>
 <tr>
-<td align="left">长整型</td>
-<td align="center">Long</td>
-<td align="center">ULong</td>
+<td style="text-align:left">长整型</td>
+<td style="text-align:center">Long</td>
+<td style="text-align:center">ULong</td>
 </tr>
 <tr>
-<td align="left">字符串</td>
-<td align="center">String</td>
-<td align="center">String</td>
+<td style="text-align:left">字符串</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">String</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><em>无符号类型 不能声明为负数</em></p>
-<h3 id="5-String"><a href="#5-String" class="headerlink" title="5. String"></a>5. String</h3><p>kotlin中使用 字符串模板，不需要像Java一样用 “+” 拼接</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(<span class="string">&quot;value of string &#x27;b&#x27; is: <span class="variable">$b</span>, length of string &#x27;b&#x27; is <span class="subst">$&#123;b.length&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>kotlin 中 双等号<code>==</code>比较两个字符串的值， 三等号<code>===</code>比较两个字符串的引用（即Kotlin中<code>===</code><br>和JAVA中的<code>==</code>作用一致）</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s1 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line"><span class="keyword">val</span> s2 = String(<span class="string">&quot;Hello&quot;</span>.toCharArray())</span><br><span class="line"></span><br><span class="line">println(s1 == s2) <span class="comment">// true</span></span><br><span class="line">println(s1 === s2) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="5-String"><a href="#5-String" class="headerlink" title="5. String"></a>5. String</h3><p>kotlin中使用 字符串模板，不需要像Java一样用 “+” 拼接<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(<span class="string">&quot;value of string &#x27;b&#x27; is: <span class="variable">$b</span>, length of string &#x27;b&#x27; is <span class="subst">$&#123;b.length&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure><br>kotlin 中 双等号<code>==</code>比较两个字符串的值， 三等号<code>===</code>比较两个字符串的引用（即Kotlin中<code>===</code><br>和JAVA中的<code>==</code>作用一致）<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s1 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line"><span class="keyword">val</span> s2 = String(<span class="string">&quot;Hello&quot;</span>.toCharArray())</span><br><span class="line"></span><br><span class="line">println(s1 == s2) <span class="comment">// true</span></span><br><span class="line">println(s1 === s2) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="6-Raw-String"><a href="#6-Raw-String" class="headerlink" title="6. Raw String"></a>6. Raw String</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    内容</span></span><br><span class="line"><span class="string">     行1</span></span><br><span class="line"><span class="string">      行2</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>.trimIndent())</span><br></pre></td></tr></table></figure>
-<p>打印出来的格式会和直接输入进去的格式一模一样，所有的空格 &amp; 变量都会包含<br><code>trimIndent()</code>用于把前面的公共空格消掉</p>
+<p>打印出来的格式会和直接输入进去的格式一模一样，所有的空格 &amp; 变量都会包含\<br><code>trimIndent()</code>用于把前面的公共空格消掉</p>
 <h2 id="II-数组"><a href="#II-数组" class="headerlink" title="II. 数组"></a>II. 数组</h2><h2 id="III-区间"><a href="#III-区间" class="headerlink" title="III. 区间"></a>III. 区间</h2><h2 id="IV-集合"><a href="#IV-集合" class="headerlink" title="IV. 集合"></a>IV. 集合</h2><h2 id="V-Pair-amp-Triple"><a href="#V-Pair-amp-Triple" class="headerlink" title="V. Pair &amp; Triple"></a>V. Pair &amp; Triple</h2><h2 id="VI-函数"><a href="#VI-函数" class="headerlink" title="VI. 函数"></a>VI. 函数</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhuhanjiang.github.io/2021/04/26/kotlin-i/" data-id="ckos1hg7z00016odx4vwyc0hs" data-title="Kotlin 学习笔记（1）-- 内置类型" class="article-share-link">Share</a>
+      <a data-url="http://zhuhanjiang.github.io/2021/04/26/kotlin-i/" data-id="ckos1wahv0003bkdxd1so8ekh" data-title="Kotlin 学习笔记（1）-- 内置类型" class="article-share-link">Share</a>
       
       
       
@@ -292,7 +293,7 @@
       <ul>
         
           <li>
-            <a href="/2021/04/26/kotlin-total/">Kotlin 学习笔记</a>
+            <a href="/2021/04/26/kotlin-ii/">Kotlin 学习笔记（2）--</a>
           </li>
         
           <li>

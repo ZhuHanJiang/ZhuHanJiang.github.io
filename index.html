@@ -286,7 +286,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-17 15:06:38" itemprop="dateModified" datetime="2021-05-17T15:06:38+08:00">2021-05-17</time>
+        <time title="Modified: 2021-05-19 11:50:34" itemprop="dateModified" datetime="2021-05-19T11:50:34+08:00">2021-05-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -404,7 +404,50 @@
 <li>xor(bits) – 位异或</li>
 <li>inv() – 位非</li>
 </ul>
-<h2 id="II-数组"><a href="#II-数组" class="headerlink" title="II. 数组"></a>II. 数组</h2><p>Kotlin中数组用<code>Array</code>类表示，包含：<code>get</code>与<code>set</code>函数（运算符重载为<code>[]</code>）,<code>size</code>属性<br>| | Kotlin | Java |<br>| 整型 ｜ IntArray ｜ int[] |<br>| 整型装箱 ｜ Array<Int> | Integer[] |<br>| 字符 ｜ CharArray | char[] |<br>| 字符装箱 | Array<Char> | Character[] |<br>| 字符串 ｜ Array<String> | String[] |<br>| 自定义类 ｜ Array<Person> |<br><em>基本数据类型都有对应的<code>xxArray</code>,(Long\Float\Double\Byte)</em></p>
+<h2 id="II-数组"><a href="#II-数组" class="headerlink" title="II. 数组"></a>II. 数组</h2><p>Kotlin中数组用<code>Array</code>类表示，包含：<code>get</code>与<code>set</code>函数（运算符重载为<code>[]</code>）,<code>size</code>属性</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center">Kotlin</th>
+<th style="text-align:center">Java</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">整型</td>
+<td style="text-align:center">IntArray</td>
+<td style="text-align:center">int[]</td>
+</tr>
+<tr>
+<td style="text-align:left">整型装箱</td>
+<td style="text-align:center">Array\<Int></td>
+<td style="text-align:center">Integer[]</td>
+</tr>
+<tr>
+<td style="text-align:left">字符</td>
+<td style="text-align:center">CharArray</td>
+<td style="text-align:center">char[]</td>
+</tr>
+<tr>
+<td style="text-align:left">字符装箱</td>
+<td style="text-align:center">Array\<Char></td>
+<td style="text-align:center">Character[]</td>
+</tr>
+<tr>
+<td style="text-align:left">字符串</td>
+<td style="text-align:center">Array\<String></td>
+<td style="text-align:center">String[]</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义类</td>
+<td style="text-align:center">Array\<Person></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>基本数据类型都有对应的<code>xxArray</code>,(Long\Float\Double\Byte)</em></p>
 <h3 id="1-创建数组"><a href="#1-创建数组" class="headerlink" title="1. 创建数组"></a>1. 创建数组</h3><p>库函数<code>arrayOf(vararg 变长参数)</code>或<code>arrayOfNulls(size)</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr1 = intArrayOf(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>) <span class="comment">// 创建【1，2，3，4，5】的整型数组</span></span><br></pre></td></tr></table></figure><br>构造函数<code>Array(size, init: (int) -&gt; int)</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr2 = IntArray(<span class="number">5</span>) &#123; it + <span class="number">1</span> &#125; <span class="comment">// it 为lambda函数默认输入参数</span></span><br><span class="line">arr2.forEach &#123; println(it) &#125;</span><br><span class="line">println(arr2.contentToString()) <span class="comment">// 数组打印: [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="2-数组读写"><a href="#2-数组读写" class="headerlink" title="2. 数组读写"></a>2. 数组读写</h3><p>运算符重载：<code>[]</code>代表调用成员函数<code>get()</code> &amp; <code>set(value)</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr3 = arrayOf(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br><span class="line">arr3[<span class="number">1</span>] = <span class="string">&quot;kotlin&quot;</span></span><br><span class="line">println(<span class="string">&quot;<span class="subst">$&#123;arr3[<span class="number">0</span>]&#125;</span>, <span class="subst">$&#123;arr3[<span class="number">1</span>]&#125;</span>&quot;</span>) <span class="comment">// &quot;hello, kotlin&quot;</span></span><br></pre></td></tr></table></figure><br>Kotlin 中数组是不型变的（invariant）。这意味着 Kotlin 不让我们把 <code>Array&lt;String&gt;</code> 赋值给 <code>Array&lt;Any&gt;</code>，以防止可能的运行时失败</p>
 <h3 id="3-查找特定element"><a href="#3-查找特定element" class="headerlink" title="3. 查找特定element"></a>3. 查找特定element</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找浮点值&quot;1f&quot;是否存在于array &quot;e&quot;中</span></span><br><span class="line"><span class="keyword">if</span> (e.any&#123; it == <span class="number">1f</span> &#125;) &#123;  <span class="comment">// 官方不建议用 if(1f in e) 的判断方式，不安全</span></span><br><span class="line">    println(<span class="string">&quot;1f exists in array e&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// array e 中没有 1f</span></span><br><span class="line"><span class="keyword">if</span> (!e.any&#123; it == <span class="number">1f</span> &#125;) &#123;</span><br><span class="line">    println(<span class="string">&quot;1f not in array e&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

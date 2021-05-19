@@ -28,7 +28,7 @@
 <meta property="og:description" content="I. 基本类型     Kotlin Java     字节 Byte byte &#x2F; Byte   整型 Int &amp; Long int &#x2F; Integer &amp; long &#x2F; Long   浮点型 Float &amp; Double float &#x2F; Float &amp; double &#x2F; Double   字符 Char char &#x2F; Character   字符串 String">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-26T05:41:02.000Z">
-<meta property="article:modified_time" content="2021-05-19T07:02:40.214Z">
+<meta property="article:modified_time" content="2021-05-19T07:05:31.461Z">
 <meta property="article:author" content="Joanne Jiang">
 <meta property="article:tag" content="Kotlin">
 <meta property="article:tag" content="study notes">
@@ -122,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-text">I. 基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-val-amp-var"><span class="nav-text">1. val &amp; var</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Long-%E7%B1%BB%E5%9E%8B"><span class="nav-text">2. Long 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">3. 数值类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B%EF%BC%88%E5%8F%AF%E5%85%BC%E5%AE%B9C%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="nav-text">4. 无符号类型（可兼容C语言）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-String"><span class="nav-text">5. String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Raw-String"><span class="nav-text">6. Raw String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-text">7. 位运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E6%95%B0%E7%BB%84"><span class="nav-text">II. 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-text">1. 创建数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E7%BB%84%E8%AF%BB%E5%86%99"><span class="nav-text">2. 数组读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9F%A5%E6%89%BE%E7%89%B9%E5%AE%9Aelement"><span class="nav-text">3. 查找特定element</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E5%8C%BA%E9%97%B4"><span class="nav-text">III. 区间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA"><span class="nav-text">1.创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%93%E5%8D%B0"><span class="nav-text">2.打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%AD%E4%BB%A3%EF%BC%88%E4%BB%85%E7%A6%BB%E6%95%A3%E5%8C%BA%E9%97%B4%E5%8F%AF%E7%94%A8%EF%BC%89"><span class="nav-text">3.迭代（仅离散区间可用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E6%89%BEelement"><span class="nav-text">4.查找element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%BA%94%E7%94%A8"><span class="nav-text">5.应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-%E9%9B%86%E5%90%88"><span class="nav-text">IV. 集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V-Pair-amp-Triple"><span class="nav-text">V. Pair &amp; Triple</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VI-%E5%87%BD%E6%95%B0"><span class="nav-text">VI. 函数</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-text">I. 基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-val-amp-var"><span class="nav-text">1. val &amp; var</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Long-%E7%B1%BB%E5%9E%8B"><span class="nav-text">2. Long 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">3. 数值类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B%EF%BC%88%E5%8F%AF%E5%85%BC%E5%AE%B9C%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="nav-text">4. 无符号类型（可兼容C语言）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-String"><span class="nav-text">5. String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Raw-String"><span class="nav-text">6. Raw String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-text">7. 位运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E6%95%B0%E7%BB%84"><span class="nav-text">II. 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="nav-text">1. 创建数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E7%BB%84%E8%AF%BB%E5%86%99"><span class="nav-text">2. 数组读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9F%A5%E6%89%BE%E7%89%B9%E5%AE%9Aelement"><span class="nav-text">3. 查找特定element</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E5%8C%BA%E9%97%B4"><span class="nav-text">III. 区间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA"><span class="nav-text">1.创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%93%E5%8D%B0"><span class="nav-text">2.打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%AD%E4%BB%A3%EF%BC%88%E4%BB%85%E7%A6%BB%E6%95%A3%E5%8C%BA%E9%97%B4%E5%8F%AF%E7%94%A8%EF%BC%89"><span class="nav-text">3.迭代（仅离散区间可用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E6%89%BEelement"><span class="nav-text">4.查找element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%BA%94%E7%94%A8"><span class="nav-text">5.应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-%E9%9B%86%E5%90%88"><span class="nav-text">IV. 集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V-Pair-amp-Triple"><span class="nav-text">V. Pair &amp; Triple</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -224,7 +224,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-19 15:02:40" itemprop="dateModified" datetime="2021-05-19T15:02:40+08:00">2021-05-19</time>
+        <time title="Modified: 2021-05-19 15:05:31" itemprop="dateModified" datetime="2021-05-19T15:05:31+08:00">2021-05-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -405,7 +405,7 @@
 <li>连续区间：由于不可数，<code>any&#123;&#125;</code>方法不适用。可使用<code>if (element in range)</code>的方式</li>
 </ul>
 <h3 id="5-应用"><a href="#5-应用" class="headerlink" title="5.应用"></a>5.应用</h3><p>在指定区间内遍历的时候，可使用区间直接给出范围和步长。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (i in 0 until array.size) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">//在kotlin中也可以</span><br><span class="line">for (i in array.indices) &#123;...&#125;</span><br></pre></td></tr></table></figure><br>在kotlin中还有很多其他的用途，后续再慢慢发现</p>
-<h2 id="IV-集合"><a href="#IV-集合" class="headerlink" title="IV. 集合"></a>IV. 集合</h2><h2 id="V-Pair-amp-Triple"><a href="#V-Pair-amp-Triple" class="headerlink" title="V. Pair &amp; Triple"></a>V. Pair &amp; Triple</h2><h2 id="VI-函数"><a href="#VI-函数" class="headerlink" title="VI. 函数"></a>VI. 函数</h2>
+<h2 id="IV-集合"><a href="#IV-集合" class="headerlink" title="IV. 集合"></a>IV. 集合</h2><h2 id="V-Pair-amp-Triple"><a href="#V-Pair-amp-Triple" class="headerlink" title="V. Pair &amp; Triple"></a>V. Pair &amp; Triple</h2>
     </div>
 
     
@@ -427,8 +427,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/04/26/kotlin-ii/" rel="next" title="Kotlin 学习笔记（2）--">
-                  Kotlin 学习笔记（2）-- <i class="fa fa-chevron-right"></i>
+                <a href="/2021/04/26/kotlin-ii/" rel="next" title="Kotlin 学习笔记（2）-- 函数基础">
+                  Kotlin 学习笔记（2）-- 函数基础 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

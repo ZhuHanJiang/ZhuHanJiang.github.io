@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zhuhanjiang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
+<meta name="description" content="I.注解的基本概念 注解是对程序的附加信息说明 注解可以对类、函数、函数参数、属性等做标注 注解的信息可用于源码级、编译期、运行时 源码期：生成文档时，给开发者看的 编译期：给编译器看的，仅保留到编译期，运行时获取不到 运行时：一直保留到运行时段，用于反射    II.定义注解类123@Retention(AnnotationRetention.RUNTIME) &#x2F;&#x2F; 限定时期作用到运行时@Tar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin 学习笔记（8）-- 注解">
+<meta property="og:url" content="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/index.html">
+<meta property="og:site_name" content="Let&#39;s Study">
+<meta property="og:description" content="I.注解的基本概念 注解是对程序的附加信息说明 注解可以对类、函数、函数参数、属性等做标注 注解的信息可用于源码级、编译期、运行时 源码期：生成文档时，给开发者看的 编译期：给编译器看的，仅保留到编译期，运行时获取不到 运行时：一直保留到运行时段，用于反射    II.定义注解类123@Retention(AnnotationRetention.RUNTIME) &#x2F;&#x2F; 限定时期作用到运行时@Tar">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/annotation.png">
+<meta property="og:image" content="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/jvm.png">
+<meta property="article:published_time" content="2021-05-19T07:14:32.000Z">
+<meta property="article:modified_time" content="2021-05-19T11:45:36.964Z">
+<meta property="article:author" content="Joanne Jiang">
+<meta property="article:tag" content="Kotlin">
+<meta property="article:tag" content="study notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/annotation.png">
+
+
+<link rel="canonical" href="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;zhuhanjiang.github.io&#x2F;2021&#x2F;05&#x2F;19&#x2F;kotlin-viii&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;19&#x2F;kotlin-viii&#x2F;&quot;,&quot;title&quot;:&quot;Kotlin 学习笔记（8）-- 注解&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Kotlin 学习笔记（8）-- 注解 | Let's Study</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Let's Study</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Record what I'm learning</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">I.注解的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3%E7%B1%BB"><span class="nav-text">II.定义注解类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-%E4%BD%BF%E7%94%A8"><span class="nav-text">III. 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IV-%E6%B3%A8%E8%A7%A3-vs-%E6%B3%A8%E9%87%8A"><span class="nav-text">IV. 注解 vs 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V-%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E6%B3%A8%E8%A7%A3"><span class="nav-text">V.常见内置注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%94%A8%E4%BA%8E%E6%A0%87%E6%B3%A8%E6%B3%A8%E8%A7%A3%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-text">1. 用于标注注解的注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E9%80%9A%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="nav-text">2. 标准库的通用注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-java%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3"><span class="nav-text">3. java虚拟机相关注解</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Joanne Jiang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuhanjiang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuhanjiang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Joanne Jiang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Let's Study">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kotlin 学习笔记（8）-- 注解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-05-19 15:14:32 / Modified: 19:45:36" itemprop="dateCreated datePublished" datetime="2021-05-19T15:14:32+08:00">2021-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kotlin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Kotlin学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="I-注解的基本概念"><a href="#I-注解的基本概念" class="headerlink" title="I.注解的基本概念"></a>I.注解的基本概念</h3><ul>
+<li>注解是对程序的附加信息说明</li>
+<li>注解可以对类、函数、函数参数、属性等做标注</li>
+<li>注解的信息可用于源码级、编译期、运行时<ul>
+<li>源码期：生成文档时，给开发者看的</li>
+<li>编译期：给编译器看的，仅保留到编译期，运行时获取不到</li>
+<li>运行时：一直保留到运行时段，用于反射</li>
+</ul>
+</li>
+</ul>
+<h3 id="II-定义注解类"><a href="#II-定义注解类" class="headerlink" title="II.定义注解类"></a>II.定义注解类</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(AnnotationRetention.RUNTIME)</span> <span class="comment">// 限定时期作用到运行时</span></span><br><span class="line"><span class="meta">@Target(AnnotationTarget.CLASS)</span> <span class="comment">// 限定作用于类/接口/Object</span></span><br><span class="line"><span class="keyword">annotation</span> <span class="class"><span class="keyword">class</span> <span class="title">Api</span></span>(<span class="keyword">val</span> url: String) <span class="comment">// url为参数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationRetention</span> </span>&#123;</span><br><span class="line">    SOURCE, BINARY, RUNTIME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SOURCE &lt; BINARY &lt; RUNTIME (可作用范围，RUNTIME会一直保留到代码运行)</p>
+<p>注解输入的参数仅支持以下类型及其数组：基本类型， KClass，枚举，其他注解<br><em>要求是那些在编译期就能确定值的类型</em></p>
+<h3 id="III-使用"><a href="#III-使用" class="headerlink" title="III. 使用"></a>III. 使用</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api(<span class="meta-string">&quot;https:url.com&quot;</span>)</span> <span class="comment">// 输入注解所需参数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GithubApi</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>@JvmName：指定 类/方法 在JVM中的名字, 让编译生成的类名 可以与 代码中的名字 不同<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@file:JvmName</span>(<span class="string">&quot;Hello&quot;</span>) <span class="comment">//指定注解的标注对象为file</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="IV-注解-vs-注释"><a href="#IV-注解-vs-注释" class="headerlink" title="IV. 注解 vs 注释"></a>IV. 注解 vs 注释</h3><p>Annotations: 参与编译的特定语法现象<br>Comments: 仅存在于源码中，提升可读性</p>
+<h3 id="V-常见内置注解"><a href="#V-常见内置注解" class="headerlink" title="V.常见内置注解"></a>V.常见内置注解</h3><h4 id="1-用于标注注解的注解"><a href="#1-用于标注注解的注解" class="headerlink" title="1. 用于标注注解的注解"></a>1. 用于标注注解的注解</h4><p>import path: kotlin.annotation.*<br><img src="annotation.png" alt=""></p>
+<h4 id="2-标准库的通用注解"><a href="#2-标准库的通用注解" class="headerlink" title="2. 标准库的通用注解"></a>2. 标准库的通用注解</h4><p>import path: kotlin.*</p>
+<ul>
+<li>Metadata：kotlin反射的信息通过该注解附带在元素上</li>
+<li>UnsafeVariance：泛型用来破除型变限制</li>
+<li>Suppress：用来去除编译器警告，警告类型作为参数传入</li>
+</ul>
+<p>还有很多注解，可以去看documentation</p>
+<h4 id="3-java虚拟机相关注解"><a href="#3-java虚拟机相关注解" class="headerlink" title="3. java虚拟机相关注解"></a>3. java虚拟机相关注解</h4><p>kotlin.jvm.* 用于与java虚拟机交互的注解<br><img src="jvm.png" alt=""></p>
+<p>很重要，尤其现在很多项目都是 Kotlin 与 Java 一起使用，这些Jvm注解可以帮助我们在两种语言中达成一样的效果，进而避免一些可能引起的问题。</p>
+<ul>
+<li>JvmField：生成java中的 field（kotlin中的属性可能到java中会生成为private，添加JvmField就是public了）</li>
+<li>JvmName：给方法、文件、类等指定在jvm中的名字</li>
+<li>JvmOverloads：函数默认参数生成函数重载。指定默认参数的方法，在java看来是一个overload的函数</li>
+<li>JvmMultifileClass: 该jvm类有多个文件，会生成多个该名字的类，编译后其实都在一个文件上</li>
+<li>JvmStatic：把方法编译成静态，生成静态成员</li>
+<li>Synchronized：标记函数为同步函数</li>
+<li>Throws：标记函数抛出的异常类型。kotlin没有受检异常，加在方法上的@Throws(IOException::class) 和java中 xxFunction throws IOException 一样</li>
+<li>Volatile：生成volatile的 Field</li>
+<li>Transient：配合序列化，标记属性不被序列化</li>
+</ul>
+<p>这些都是常用的jvm注解，其他也可以到documentation中查看</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/26/kotlin-ii/" rel="prev" title="Kotlin 学习笔记（2）-- 函数基础">
+                  <i class="fa fa-chevron-left"></i> Kotlin 学习笔记（2）-- 函数基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joanne Jiang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

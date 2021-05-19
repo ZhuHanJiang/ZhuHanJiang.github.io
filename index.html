@@ -129,7 +129,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -176,6 +176,118 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Joanne Jiang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Let's Study">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/19/kotlin-viii/" class="post-title-link" itemprop="url">Kotlin 学习笔记（8）-- 注解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-05-19 15:14:32 / Modified: 19:45:36" itemprop="dateCreated datePublished" datetime="2021-05-19T15:14:32+08:00">2021-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kotlin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Kotlin学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="I-注解的基本概念"><a href="#I-注解的基本概念" class="headerlink" title="I.注解的基本概念"></a>I.注解的基本概念</h3><ul>
+<li>注解是对程序的附加信息说明</li>
+<li>注解可以对类、函数、函数参数、属性等做标注</li>
+<li>注解的信息可用于源码级、编译期、运行时<ul>
+<li>源码期：生成文档时，给开发者看的</li>
+<li>编译期：给编译器看的，仅保留到编译期，运行时获取不到</li>
+<li>运行时：一直保留到运行时段，用于反射</li>
+</ul>
+</li>
+</ul>
+<h3 id="II-定义注解类"><a href="#II-定义注解类" class="headerlink" title="II.定义注解类"></a>II.定义注解类</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(AnnotationRetention.RUNTIME)</span> <span class="comment">// 限定时期作用到运行时</span></span><br><span class="line"><span class="meta">@Target(AnnotationTarget.CLASS)</span> <span class="comment">// 限定作用于类/接口/Object</span></span><br><span class="line"><span class="keyword">annotation</span> <span class="class"><span class="keyword">class</span> <span class="title">Api</span></span>(<span class="keyword">val</span> url: String) <span class="comment">// url为参数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationRetention</span> </span>&#123;</span><br><span class="line">    SOURCE, BINARY, RUNTIME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SOURCE &lt; BINARY &lt; RUNTIME (可作用范围，RUNTIME会一直保留到代码运行)</p>
+<p>注解输入的参数仅支持以下类型及其数组：基本类型， KClass，枚举，其他注解<br><em>要求是那些在编译期就能确定值的类型</em></p>
+<h3 id="III-使用"><a href="#III-使用" class="headerlink" title="III. 使用"></a>III. 使用</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api(<span class="meta-string">&quot;https:url.com&quot;</span>)</span> <span class="comment">// 输入注解所需参数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GithubApi</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>@JvmName：指定 类/方法 在JVM中的名字, 让编译生成的类名 可以与 代码中的名字 不同<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@file:JvmName</span>(<span class="string">&quot;Hello&quot;</span>) <span class="comment">//指定注解的标注对象为file</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="IV-注解-vs-注释"><a href="#IV-注解-vs-注释" class="headerlink" title="IV. 注解 vs 注释"></a>IV. 注解 vs 注释</h3><p>Annotations: 参与编译的特定语法现象<br>Comments: 仅存在于源码中，提升可读性</p>
+<h3 id="V-常见内置注解"><a href="#V-常见内置注解" class="headerlink" title="V.常见内置注解"></a>V.常见内置注解</h3><h4 id="1-用于标注注解的注解"><a href="#1-用于标注注解的注解" class="headerlink" title="1. 用于标注注解的注解"></a>1. 用于标注注解的注解</h4><p>import path: kotlin.annotation.*<br><img src="annotation.png" alt=""></p>
+<h4 id="2-标准库的通用注解"><a href="#2-标准库的通用注解" class="headerlink" title="2. 标准库的通用注解"></a>2. 标准库的通用注解</h4><p>import path: kotlin.*</p>
+<ul>
+<li>Metadata：kotlin反射的信息通过该注解附带在元素上</li>
+<li>UnsafeVariance：泛型用来破除型变限制</li>
+<li>Suppress：用来去除编译器警告，警告类型作为参数传入</li>
+</ul>
+<p>还有很多注解，可以去看documentation</p>
+<h4 id="3-java虚拟机相关注解"><a href="#3-java虚拟机相关注解" class="headerlink" title="3. java虚拟机相关注解"></a>3. java虚拟机相关注解</h4><p>kotlin.jvm.* 用于与java虚拟机交互的注解<br><img src="jvm.png" alt=""></p>
+<p>很重要，尤其现在很多项目都是 Kotlin 与 Java 一起使用，这些Jvm注解可以帮助我们在两种语言中达成一样的效果，进而避免一些可能引起的问题。</p>
+<ul>
+<li>JvmField：生成java中的 field（kotlin中的属性可能到java中会生成为private，添加JvmField就是public了）</li>
+<li>JvmName：给方法、文件、类等指定在jvm中的名字</li>
+<li>JvmOverloads：函数默认参数生成函数重载。指定默认参数的方法，在java看来是一个overload的函数</li>
+<li>JvmMultifileClass: 该jvm类有多个文件，会生成多个该名字的类，编译后其实都在一个文件上</li>
+<li>JvmStatic：把方法编译成静态，生成静态成员</li>
+<li>Synchronized：标记函数为同步函数</li>
+<li>Throws：标记函数抛出的异常类型。kotlin没有受检异常，加在方法上的@Throws(IOException::class) 和java中 xxFunction throws IOException 一样</li>
+<li>Volatile：生成volatile的 Field</li>
+<li>Transient：配合序列化，标记属性不被序列化</li>
+</ul>
+<p>这些都是常用的jvm注解，其他也可以到documentation中查看</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

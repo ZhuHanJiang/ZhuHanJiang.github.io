@@ -20,23 +20,32 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zhuhanjiang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Let&#39;s Study">
-<meta property="og:url" content="http://zhuhanjiang.github.io/index.html">
+<meta name="description" content="I.协程的基本概念协程是在语言上实现的比线程更小的单位，可以看做为轻量级的线程。但协程依然运行在线程上，是用户态、完全由程序所控制的，也因此不会像线程切换那样消耗资源。在内核上最小的调度单位依然是线程，一个线程上可以有多个协程。但是一个线程上的多个协程一定是串行运行的，当一个协程执行时，其他协程必须挂起  协程是可以由程序自行控制挂起、恢复的程序&#x2F;函数 协程可以用来实现多任务的协作执行 协程可以用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin 学习笔记（9）-- 协程初步">
+<meta property="og:url" content="http://zhuhanjiang.github.io/2021/05/21/kotlin-viiii/index.html">
 <meta property="og:site_name" content="Let&#39;s Study">
+<meta property="og:description" content="I.协程的基本概念协程是在语言上实现的比线程更小的单位，可以看做为轻量级的线程。但协程依然运行在线程上，是用户态、完全由程序所控制的，也因此不会像线程切换那样消耗资源。在内核上最小的调度单位依然是线程，一个线程上可以有多个协程。但是一个线程上的多个协程一定是串行运行的，当一个协程执行时，其他协程必须挂起  协程是可以由程序自行控制挂起、恢复的程序&#x2F;函数 协程可以用来实现多任务的协作执行 协程可以用">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://zhuhanjiang.github.io/2021/05/21/kotlin-viiii/symmetric.png">
+<meta property="og:image" content="http://zhuhanjiang.github.io/2021/05/21/kotlin-viiii/asymmetric.png">
+<meta property="article:published_time" content="2021-05-21T02:37:47.000Z">
+<meta property="article:modified_time" content="2021-06-07T12:35:34.736Z">
 <meta property="article:author" content="Joanne Jiang">
+<meta property="article:tag" content="Kotlin">
+<meta property="article:tag" content="study notes">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhuhanjiang.github.io/2021/05/21/kotlin-viiii/symmetric.png">
 
 
-<link rel="canonical" href="http://zhuhanjiang.github.io/">
+<link rel="canonical" href="http://zhuhanjiang.github.io/2021/05/21/kotlin-viiii/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;zhuhanjiang.github.io&#x2F;2021&#x2F;05&#x2F;21&#x2F;kotlin-viiii&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;21&#x2F;kotlin-viiii&#x2F;&quot;,&quot;title&quot;:&quot;Kotlin 学习笔记（9）-- 协程初步&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Let's Study</title><script src="/js/config.js"></script>
+<title>Kotlin 学习笔记（9）-- 协程初步 | Let's Study</title><script src="/js/config.js"></script>
   
 
 
@@ -103,7 +112,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -116,6 +125,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">I.协程的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BD%9C%E7%94%A8"><span class="nav-text">1. 作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="nav-text">2. 协程的异步机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BA%BF%E7%A8%8B-vs-%E5%8D%8F%E7%A8%8B"><span class="nav-text">3. 线程 vs 协程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-kotlin%E5%8D%8F%E7%A8%8B%E6%94%AF%E6%8C%81"><span class="nav-text">4. kotlin协程支持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">II. 协程的常见实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-text">1. 协程的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">2. 常见实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-Generator%EF%BC%9A%E6%97%A0%E6%A0%88%E7%9A%84%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8D%8F%E7%A8%8B"><span class="nav-text">Python Generator：无栈的非对称协程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lua-Coroutine%EF%BC%9A%E6%9C%89%E6%A0%88%E7%9A%84%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8D%8F%E7%A8%8B"><span class="nav-text">Lua Coroutine：有栈的非对称协程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Go-routine-%E5%AF%B9%E7%A7%B0%E5%8D%8F%E7%A8%8B%EF%BC%88%E7%9B%B8%E4%BA%92%E4%B9%8B%E9%97%B4%E7%8B%AC%E7%AB%8B%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E5%BC%80%E5%A7%8B%EF%BC%89"><span class="nav-text">Go routine: 对称协程（相互之间独立，可以同时开始）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async-await%E5%AE%9E%E7%8E%B0%EF%BC%9A-JavaScript-C-Python-Rust%E2%80%A6-kotlin%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0"><span class="nav-text">async&#x2F;await实现： JavaScript, C#, Python, Rust… (kotlin也可以实现)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-kotlin%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%B4%A0"><span class="nav-text">3. kotlin协程的基本要素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0-suspend"><span class="nav-text">挂起函数 suspend</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Continuation"><span class="nav-text">Continuation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-text">挂起函数的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E6%8C%82%E8%B5%B7%E3%80%81%E6%81%A2%E5%A4%8D"><span class="nav-text">如何做到挂起、恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E5%9B%9E%E8%B0%83%E6%96%B9%E5%BC%8F%E8%BD%AC%E5%86%99%E6%88%90%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0"><span class="nav-text">将回调方式转写成挂起函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-text">协程的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%8D%8F%E7%A8%8B"><span class="nav-text">启动协程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">协程上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-text">拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Continuation-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">Continuation 执行流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="nav-text">协程的线程调度</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,16 +185,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/05/21/kotlin-viiii/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -197,9 +208,9 @@
       <meta itemprop="name" content="Let's Study">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/21/kotlin-viiii/" class="post-title-link" itemprop="url">Kotlin 学习笔记（9）-- 协程初步</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Kotlin 学习笔记（9）-- 协程初步
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -238,7 +249,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="I-协程的基本概念"><a href="#I-协程的基本概念" class="headerlink" title="I.协程的基本概念"></a>I.协程的基本概念</h2><p>协程是在语言上实现的比线程更小的单位，可以看做为轻量级的线程。但协程依然运行在线程上，是用户态、完全由程序所控制的，也因此不会像线程切换那样消耗资源。<br>在内核上最小的调度单位依然是线程，一个线程上可以有多个协程。但是一个线程上的多个协程一定是串行运行的，当一个协程执行时，其他协程必须挂起</p>
+        <h2 id="I-协程的基本概念"><a href="#I-协程的基本概念" class="headerlink" title="I.协程的基本概念"></a>I.协程的基本概念</h2><p>协程是在语言上实现的比线程更小的单位，可以看做为轻量级的线程。但协程依然运行在线程上，是用户态、完全由程序所控制的，也因此不会像线程切换那样消耗资源。<br>在内核上最小的调度单位依然是线程，一个线程上可以有多个协程。但是一个线程上的多个协程一定是串行运行的，当一个协程执行时，其他协程必须挂起</p>
 <ul>
 <li>协程是可以由程序自行控制挂起、恢复的程序/函数</li>
 <li>协程可以用来实现多任务的协作执行</li>
@@ -409,7 +420,6 @@
 </ul>
 <h4 id="协程的线程调度"><a href="#协程的线程调度" class="headerlink" title="协程的线程调度"></a>协程的线程调度</h4><p>主要是通过interceptor来实现：在interceptor里面将原始的Continuation替换成一个新的continuation<br>在interceptor里面先切线程，再执行SuspendLambda的逻辑，就完成了线程切换</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">suspend</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;.startCoroutine(<span class="keyword">object</span> : Continuation&lt;<span class="built_in">Unit</span>&gt; &#123;</span><br><span class="line">    <span class="comment">// 协程体内逻辑全部在Handler线程上执行</span></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">val</span> context = DispatcherContext(HandlerDispatcher)</span><br><span class="line">    </span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
@@ -417,582 +427,26 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/19/kotlin-viii/" rel="prev" title="Kotlin 学习笔记（8）-- 注解">
+                  <i class="fa fa-chevron-left"></i> Kotlin 学习笔记（8）-- 注解
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/05/19/kotlin-viii/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Joanne Jiang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Let's Study">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/19/kotlin-viii/" class="post-title-link" itemprop="url">Kotlin 学习笔记（8）-- 注解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-05-19 15:14:32 / Modified: 19:45:36" itemprop="dateCreated datePublished" datetime="2021-05-19T15:14:32+08:00">2021-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Kotlin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Kotlin学习笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="I-注解的基本概念"><a href="#I-注解的基本概念" class="headerlink" title="I.注解的基本概念"></a>I.注解的基本概念</h3><ul>
-<li>注解是对程序的附加信息说明</li>
-<li>注解可以对类、函数、函数参数、属性等做标注</li>
-<li>注解的信息可用于源码级、编译期、运行时<ul>
-<li>源码期：生成文档时，给开发者看的</li>
-<li>编译期：给编译器看的，仅保留到编译期，运行时获取不到</li>
-<li>运行时：一直保留到运行时段，用于反射</li>
-</ul>
-</li>
-</ul>
-<h3 id="II-定义注解类"><a href="#II-定义注解类" class="headerlink" title="II.定义注解类"></a>II.定义注解类</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(AnnotationRetention.RUNTIME)</span> <span class="comment">// 限定时期作用到运行时</span></span><br><span class="line"><span class="meta">@Target(AnnotationTarget.CLASS)</span> <span class="comment">// 限定作用于类/接口/Object</span></span><br><span class="line"><span class="keyword">annotation</span> <span class="class"><span class="keyword">class</span> <span class="title">Api</span></span>(<span class="keyword">val</span> url: String) <span class="comment">// url为参数</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationRetention</span> </span>&#123;</span><br><span class="line">    SOURCE, BINARY, RUNTIME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SOURCE &lt; BINARY &lt; RUNTIME (可作用范围，RUNTIME会一直保留到代码运行)</p>
-<p>注解输入的参数仅支持以下类型及其数组：基本类型， KClass，枚举，其他注解<br><em>要求是那些在编译期就能确定值的类型</em></p>
-<h3 id="III-使用"><a href="#III-使用" class="headerlink" title="III. 使用"></a>III. 使用</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api(<span class="meta-string">&quot;https:url.com&quot;</span>)</span> <span class="comment">// 输入注解所需参数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GithubApi</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>@JvmName：指定 类/方法 在JVM中的名字, 让编译生成的类名 可以与 代码中的名字 不同<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@file:JvmName</span>(<span class="string">&quot;Hello&quot;</span>) <span class="comment">//指定注解的标注对象为file</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="IV-注解-vs-注释"><a href="#IV-注解-vs-注释" class="headerlink" title="IV. 注解 vs 注释"></a>IV. 注解 vs 注释</h3><p>Annotations: 参与编译的特定语法现象<br>Comments: 仅存在于源码中，提升可读性</p>
-<h3 id="V-常见内置注解"><a href="#V-常见内置注解" class="headerlink" title="V.常见内置注解"></a>V.常见内置注解</h3><h4 id="1-用于标注注解的注解"><a href="#1-用于标注注解的注解" class="headerlink" title="1. 用于标注注解的注解"></a>1. 用于标注注解的注解</h4><p>import path: kotlin.annotation.*<br><img src="annotation.png" alt=""></p>
-<h4 id="2-标准库的通用注解"><a href="#2-标准库的通用注解" class="headerlink" title="2. 标准库的通用注解"></a>2. 标准库的通用注解</h4><p>import path: kotlin.*</p>
-<ul>
-<li>Metadata：kotlin反射的信息通过该注解附带在元素上</li>
-<li>UnsafeVariance：泛型用来破除型变限制</li>
-<li>Suppress：用来去除编译器警告，警告类型作为参数传入</li>
-</ul>
-<p>还有很多注解，可以去看documentation</p>
-<h4 id="3-java虚拟机相关注解"><a href="#3-java虚拟机相关注解" class="headerlink" title="3. java虚拟机相关注解"></a>3. java虚拟机相关注解</h4><p>kotlin.jvm.* 用于与java虚拟机交互的注解<br><img src="jvm.png" alt=""></p>
-<p>很重要，尤其现在很多项目都是 Kotlin 与 Java 一起使用，这些Jvm注解可以帮助我们在两种语言中达成一样的效果，进而避免一些可能引起的问题。</p>
-<ul>
-<li>JvmField：生成java中的 field（kotlin中的属性可能到java中会生成为private，添加JvmField就是public了）</li>
-<li>JvmName：给方法、文件、类等指定在jvm中的名字</li>
-<li>JvmOverloads：函数默认参数生成函数重载。指定默认参数的方法，在java看来是一个overload的函数</li>
-<li>JvmMultifileClass: 该jvm类有多个文件，会生成多个该名字的类，编译后其实都在一个文件上</li>
-<li>JvmStatic：把方法编译成静态，生成静态成员</li>
-<li>Synchronized：标记函数为同步函数</li>
-<li>Throws：标记函数抛出的异常类型。kotlin没有受检异常，加在方法上的@Throws(IOException::class) 和java中 xxFunction throws IOException 一样</li>
-<li>Volatile：生成volatile的 Field</li>
-<li>Transient：配合序列化，标记属性不被序列化</li>
-</ul>
-<p>这些都是常用的jvm注解，其他也可以到documentation中查看</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/04/26/kotlin-ii/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Joanne Jiang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Let's Study">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/26/kotlin-ii/" class="post-title-link" itemprop="url">Kotlin 学习笔记（2）-- 函数基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-26 14:56:18" itemprop="dateCreated datePublished" datetime="2021-04-26T14:56:18+08:00">2021-04-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-19 15:05:31" itemprop="dateModified" datetime="2021-05-19T15:05:31+08:00">2021-05-19</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/04/26/kotlin-i/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Joanne Jiang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Let's Study">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/26/kotlin-i/" class="post-title-link" itemprop="url">Kotlin 学习笔记（1）-- 内置类型</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-26 13:41:02" itemprop="dateCreated datePublished" datetime="2021-04-26T13:41:02+08:00">2021-04-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-19 15:05:31" itemprop="dateModified" datetime="2021-05-19T15:05:31+08:00">2021-05-19</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Kotlin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Kotlin学习笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="I-基本类型"><a href="#I-基本类型" class="headerlink" title="I. 基本类型"></a>I. 基本类型</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:center">Kotlin</th>
-<th style="text-align:center">Java</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">字节</td>
-<td style="text-align:center">Byte</td>
-<td style="text-align:center">byte / Byte</td>
-</tr>
-<tr>
-<td style="text-align:left">整型</td>
-<td style="text-align:center">Int &amp; Long</td>
-<td style="text-align:center">int / Integer &amp; long / Long</td>
-</tr>
-<tr>
-<td style="text-align:left">浮点型</td>
-<td style="text-align:center">Float &amp; Double</td>
-<td style="text-align:center">float / Float &amp; double / Double</td>
-</tr>
-<tr>
-<td style="text-align:left">字符</td>
-<td style="text-align:center">Char</td>
-<td style="text-align:center">char / Character</td>
-</tr>
-<tr>
-<td style="text-align:left">字符串</td>
-<td style="text-align:center">String</td>
-<td style="text-align:center">String</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="1-val-amp-var"><a href="#1-val-amp-var" class="headerlink" title="1. val &amp; var"></a>1. val &amp; var</h3><p>val: 只读变量，等同于Java中 final变量，初始化后不可修改<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val str: String = &quot;Hello World&quot; // kotlin</span><br><span class="line">final String str = &quot;Hello World&quot; // Java</span><br></pre></td></tr></table></figure></p>
-<p>var: 可读写变量， 和Java中的大部分变量一样<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num: Int = 2 // kotlin</span><br><span class="line">int num = 2 // Java</span><br></pre></td></tr></table></figure></p>
-<p><em>kotlin类型自动推导：在kotlin中声明变量可省略类型 <code>: String</code> ，kotlin会根据声明的值进行自动推导）</em></p>
-<h3 id="2-Long-类型"><a href="#2-Long-类型" class="headerlink" title="2. Long 类型"></a>2. Long 类型</h3><p>Java中数字结尾为 <code>L / l</code> 都可以编译，但在kotlin中 <code>l</code> 会编译错误</p>
-<h3 id="3-数值类型转换"><a href="#3-数值类型转换" class="headerlink" title="3. 数值类型转换"></a>3. 数值类型转换</h3><p>Kotlin中，隐式类型转换是不被允许的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">int</span> e = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">long</span> f = e; <span class="comment">//隐式转换 (Java装箱的long)</span></span><br></pre></td></tr></table></figure><br>必须使用显示转换：toLong(), toInt()等方式<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kotlin</span></span><br><span class="line"><span class="keyword">val</span> e: <span class="built_in">Int</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e <span class="comment">// 编译错误</span></span><br><span class="line"><span class="keyword">val</span> f: <span class="built_in">Long</span> = e.toLong() <span class="comment">// 正确写法</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="4-无符号类型（可兼容C语言）"><a href="#4-无符号类型（可兼容C语言）" class="headerlink" title="4. 无符号类型（可兼容C语言）"></a>4. 无符号类型（可兼容C语言）</h3><p>无符号类型只能表示非负数，范围为对应有符号类型的二倍(bit位数一样，去掉负数占用的位置)<br>Int: $-2^{31}$ ~ $2^{31} - 1$<br>UInt: 0 ~ $2^{32} - 1$</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:center">有符号</th>
-<th style="text-align:center">无符号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">字节</td>
-<td style="text-align:center">Byte</td>
-<td style="text-align:center">UByte</td>
-</tr>
-<tr>
-<td style="text-align:left">短整型</td>
-<td style="text-align:center">Short</td>
-<td style="text-align:center">UShort</td>
-</tr>
-<tr>
-<td style="text-align:left">整型</td>
-<td style="text-align:center">Int</td>
-<td style="text-align:center">UInt</td>
-</tr>
-<tr>
-<td style="text-align:left">长整型</td>
-<td style="text-align:center">Long</td>
-<td style="text-align:center">ULong</td>
-</tr>
-<tr>
-<td style="text-align:left">字符串</td>
-<td style="text-align:center">String</td>
-<td style="text-align:center">String</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><em>无符号类型 不能声明为负数</em></p>
-<h3 id="5-String"><a href="#5-String" class="headerlink" title="5. String"></a>5. String</h3><p>kotlin中使用 字符串模板，不需要像Java一样用 “+” 拼接<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(<span class="string">&quot;value of string &#x27;b&#x27; is: <span class="variable">$b</span>, length of string &#x27;b&#x27; is <span class="subst">$&#123;b.length&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure><br>kotlin 中 双等号<code>==</code>比较两个字符串的值， 三等号<code>===</code>比较两个字符串的引用（即Kotlin中<code>===</code><br>和JAVA中的<code>==</code>作用一致）<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s1 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line"><span class="keyword">val</span> s2 = String(<span class="string">&quot;Hello&quot;</span>.toCharArray())</span><br><span class="line"></span><br><span class="line">println(s1 == s2) <span class="comment">// true</span></span><br><span class="line">println(s1 === s2) <span class="comment">// false</span></span><br></pre></td></tr></table></figure><br><em><code>==</code>只能用于比较同一类的两个实例，不同类型之间比较会报错</em></p>
-<h3 id="6-Raw-String"><a href="#6-Raw-String" class="headerlink" title="6. Raw String"></a>6. Raw String</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    内容</span></span><br><span class="line"><span class="string">     行1</span></span><br><span class="line"><span class="string">      行2</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>.trimIndent())</span><br></pre></td></tr></table></figure>
-<p>打印出来的格式会和直接输入进去的格式一模一样，所有的空格 &amp; 变量都会包含<br><code>trimIndent()</code>用于把前面的公共空格消掉</p>
-<h3 id="7-位运算"><a href="#7-位运算" class="headerlink" title="7. 位运算"></a>7. 位运算</h3><p>Kotlin对于位运算，没有特殊字符，只可用中缀方式调用具名函数<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> x = (<span class="number">1</span> shl <span class="number">2</span>) and <span class="number">0x000FFF000</span></span><br></pre></td></tr></table></figure><br>完整的位运算列表（只用于 Int 与 Long）:</p>
-<ul>
-<li>shl(bits) – 有符号左移</li>
-<li>shr(bits) – 有符号右移</li>
-<li>ushr(bits) – 无符号右移</li>
-<li>and(bits) – 位与</li>
-<li>or(bits) – 位或</li>
-<li>xor(bits) – 位异或</li>
-<li>inv() – 位非</li>
-</ul>
-<h2 id="II-数组"><a href="#II-数组" class="headerlink" title="II. 数组"></a>II. 数组</h2><p>Kotlin中数组用<code>Array</code>类表示，包含：<code>get</code>与<code>set</code>函数（运算符重载为<code>[]</code>）,<code>size</code>属性</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:center">Kotlin</th>
-<th style="text-align:center">Java</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">整型</td>
-<td style="text-align:center">IntArray</td>
-<td style="text-align:center">int[]</td>
-</tr>
-<tr>
-<td style="text-align:left">整型装箱</td>
-<td style="text-align:center">Array<Int></td>
-<td style="text-align:center">Integer[]</td>
-</tr>
-<tr>
-<td style="text-align:left">字符</td>
-<td style="text-align:center">CharArray</td>
-<td style="text-align:center">char[]</td>
-</tr>
-<tr>
-<td style="text-align:left">字符装箱</td>
-<td style="text-align:center">Array<Char></td>
-<td style="text-align:center">Character[]</td>
-</tr>
-<tr>
-<td style="text-align:left">字符串</td>
-<td style="text-align:center">Array<String></td>
-<td style="text-align:center">String[]</td>
-</tr>
-<tr>
-<td style="text-align:left">自定义类</td>
-<td style="text-align:center">Array<Person></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><em>基本数据类型都有对应的<code>xxArray</code>,(Long\Float\Double\Byte)</em></p>
-<h3 id="1-创建数组"><a href="#1-创建数组" class="headerlink" title="1. 创建数组"></a>1. 创建数组</h3><p>库函数<code>arrayOf(vararg 变长参数)</code>或<code>arrayOfNulls(size)</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr1 = intArrayOf(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>) <span class="comment">// 创建【1，2，3，4，5】的整型数组</span></span><br></pre></td></tr></table></figure><br>构造函数<code>Array(size, init: (int) -&gt; int)</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr2 = IntArray(<span class="number">5</span>) &#123; it + <span class="number">1</span> &#125; <span class="comment">// it 为lambda函数默认输入参数</span></span><br><span class="line">arr2.forEach &#123; println(it) &#125;</span><br><span class="line">println(arr2.contentToString()) <span class="comment">// 数组打印: [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="2-数组读写"><a href="#2-数组读写" class="headerlink" title="2. 数组读写"></a>2. 数组读写</h3><p>运算符重载：<code>[]</code>代表调用成员函数<code>get()</code> &amp; <code>set(value)</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr3 = arrayOf(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br><span class="line">arr3[<span class="number">1</span>] = <span class="string">&quot;kotlin&quot;</span></span><br><span class="line">println(<span class="string">&quot;<span class="subst">$&#123;arr3[<span class="number">0</span>]&#125;</span>, <span class="subst">$&#123;arr3[<span class="number">1</span>]&#125;</span>&quot;</span>) <span class="comment">// &quot;hello, kotlin&quot;</span></span><br></pre></td></tr></table></figure><br>Kotlin 中数组是不型变的（invariant）。这意味着 Kotlin 不让我们把 <code>Array&lt;String&gt;</code> 赋值给 <code>Array&lt;Any&gt;</code>，以防止可能的运行时失败</p>
-<h3 id="3-查找特定element"><a href="#3-查找特定element" class="headerlink" title="3. 查找特定element"></a>3. 查找特定element</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找浮点值&quot;1f&quot;是否存在于array &quot;e&quot;中</span></span><br><span class="line"><span class="keyword">if</span> (e.any&#123; it == <span class="number">1f</span> &#125;) &#123;  <span class="comment">// 官方不建议用 if(1f in e) 的判断方式，不安全</span></span><br><span class="line">    println(<span class="string">&quot;1f exists in array e&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// array e 中没有 1f</span></span><br><span class="line"><span class="keyword">if</span> (!e.any&#123; it == <span class="number">1f</span> &#125;) &#123;</span><br><span class="line">    println(<span class="string">&quot;1f not in array e&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>any&#123; (element) -&gt; Boolean &#125;</code>: 存在任意一个元素返回true -&gt; true, 所有元素都返回false -&gt; false<br><code>any()</code>: Returns true if this array has at least one element</p>
-<h2 id="III-区间"><a href="#III-区间" class="headerlink" title="III. 区间"></a>III. 区间</h2><p>区间是Java中并没有的数据结构，在范围内遍历的时候十分方便</p>
-<h3 id="1-创建"><a href="#1-创建" class="headerlink" title="1.创建"></a>1.创建</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭区间</span></span><br><span class="line"><span class="keyword">val</span> intRange = <span class="number">1</span> .. <span class="number">10</span> <span class="comment">// [1, 10], (10 .. 1)是一个空区间，&quot;..&quot;必须是升序的</span></span><br><span class="line"><span class="keyword">val</span> charRange = <span class="string">&#x27;a&#x27;</span> .. <span class="string">&#x27;z&#x27;</span></span><br><span class="line"><span class="keyword">val</span> longRange = <span class="number">1L</span> .. <span class="number">100L</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 前闭后开区间</span></span><br><span class="line"><span class="keyword">val</span> intRangeExclusive = <span class="number">1</span> until <span class="number">10</span> <span class="comment">// [1, 10)</span></span><br><span class="line"><span class="keyword">val</span> charRangeExclusive = <span class="string">&#x27;a&#x27;</span> until <span class="string">&#x27;z&#x27;</span></span><br><span class="line"><span class="keyword">val</span> longRangeExclusive = <span class="number">1L</span> until <span class="number">100L</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 倒序区间</span></span><br><span class="line"><span class="keyword">val</span> intRangeReverse = <span class="number">10</span> downTo <span class="number">1</span> <span class="comment">// [10, 9, 8, ... 1]</span></span><br><span class="line"><span class="keyword">val</span> charRangeReverse = <span class="string">&#x27;z&#x27;</span> downTo <span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="keyword">val</span> longRangeReverse = <span class="number">100L</span> downTo <span class="number">1L</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定步长</span></span><br><span class="line"><span class="keyword">val</span> intRangeWithStep = <span class="number">1</span> .. <span class="number">10</span> step <span class="number">2</span> <span class="comment">// [1, 3, 5, 7, 9]</span></span><br><span class="line"><span class="keyword">val</span> charRangeWithStep = <span class="string">&#x27;a&#x27;</span> .. <span class="string">&#x27;z&#x27;</span> step <span class="number">3</span></span><br><span class="line"><span class="keyword">val</span> longRangeWithStep = <span class="number">1L</span> .. <span class="number">100L</span> step <span class="number">10</span></span><br></pre></td></tr></table></figure>
-<p>区间的类型为：</p>
-<ul>
-<li>离散区间：IntRange/ UIntRange, CharRange, LongRange/ ULongRange</li>
-<li>连续区间：ClosedFloatingPointRange<T> (不可数)</li>
-</ul>
-<h3 id="2-打印"><a href="#2-打印" class="headerlink" title="2.打印"></a>2.打印</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intRange.joinToString() <span class="comment">//default separator: &quot;,&quot;</span></span><br></pre></td></tr></table></figure>
-<p><em>连续区间不可数，也不可使用<code>joinToString()</code>直接打印所有数值</em></p>
-<h3 id="3-迭代（仅离散区间可用）"><a href="#3-迭代（仅离散区间可用）" class="headerlink" title="3.迭代（仅离散区间可用）"></a>3.迭代（仅离散区间可用）</h3><p>和Java方式差不多<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (element <span class="keyword">in</span> intRange) &#123;</span><br><span class="line">    println(element)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">intRange.forEach(::println)</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-查找element"><a href="#4-查找element" class="headerlink" title="4.查找element"></a>4.查找element</h3><ul>
-<li>离散区间：可以使用<code>any&#123;&#125;</code>，和数组的方式一样。也可以使用<code>if (element in range)</code></li>
-<li>连续区间：由于不可数，<code>any&#123;&#125;</code>方法不适用。可使用<code>if (element in range)</code>的方式</li>
-</ul>
-<h3 id="5-应用"><a href="#5-应用" class="headerlink" title="5.应用"></a>5.应用</h3><p>在指定区间内遍历的时候，可使用区间直接给出范围和步长。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (i in 0 until array.size) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">//在kotlin中也可以</span><br><span class="line">for (i in array.indices) &#123;...&#125;</span><br></pre></td></tr></table></figure><br>在kotlin中还有很多其他的用途，后续再慢慢发现</p>
-<h2 id="IV-集合"><a href="#IV-集合" class="headerlink" title="IV. 集合"></a>IV. 集合</h2><h2 id="V-Pair-amp-Triple"><a href="#V-Pair-amp-Triple" class="headerlink" title="V. Pair &amp; Triple"></a>V. Pair &amp; Triple</h2>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhuhanjiang.github.io/2021/04/26/kotlin-vii/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Joanne Jiang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Let's Study">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/26/kotlin-vii/" class="post-title-link" itemprop="url">Kotlin 学习笔记（7）-- 反射</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-26 13:41:02" itemprop="dateCreated datePublished" datetime="2021-04-26T13:41:02+08:00">2021-04-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-19 11:09:10" itemprop="dateModified" datetime="2021-05-19T11:09:10+08:00">2021-05-19</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Kotlin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">Kotlin学习笔记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>反射是指允许程序在运行时访问程序结构的一类特性<br>这些结构包括：类、接口、方法、属性等语法特性</p>
-<h3 id="1-依赖"><a href="#1-依赖" class="headerlink" title="1. 依赖"></a>1. 依赖</h3><p>和Java反射API不同，Kotlin有自己的API：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Kotlin JVM 运行时</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Kotlin标准库 ｜ Kotlin反射API</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>引入依赖（需要单独引入Kotlin反射API）：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  ...</span><br><span class="line">  implementation(&quot;org.jetbrains.kotlin:kotlin-reflect&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>Kotlin 字节码中，在<code>@Metadata(...)</code>注解中存放的即为反射使用的信息。例如一个位于Reflection包下面的Activity类:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Lkotlin/Metadata;(</span><br><span class="line">  mv=&#123;1, 4, 3&#125;, </span><br><span class="line">  bv=&#123;1, 0, 3&#125;, </span><br><span class="line">  k=1, </span><br><span class="line">  d1=&#123;&quot;\u0000\u001c\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\u0008\u0002\n\u0002\u0018\u0002\n\u0002\u0008\u0008\n\u0002\u0010\u0002\n\u0002\u0008\u0002\u0018\u00002\u00020\u0001B\u0005\u00a2\u0006\u0002\u0010\u0002J\u0006\u0010\u000c\u001a\u00020\rJ\u0006\u0010\u000e\u001a\u00020\rR+\u0010\u0005\u001a\u00020\u00042\u0006\u0010\u0003\u001a\u00020\u00048B@BX\u0082\u008e\u0002\u00a2\u0006\u0012\n\u0004\u0008\n\u0010\u000b\u001a\u0004\u0008\u0006\u0010\u0007\&quot;\u0004\u0008\u0008\u0010\u0009\u00a8\u0006\u000f&quot;&#125;, </span><br><span class="line">  d2=&#123;&quot;LReflection/Activity;&quot;, &quot;&quot;, &quot;()V&quot;, &quot;&lt;set-?&gt;&quot;, &quot;LReflection/Bitmap;&quot;, &quot;bitmap&quot;, &quot;getBitmap&quot;, &quot;()LReflection/Bitmap;&quot;, &quot;setBitmap&quot;, &quot;(LReflection/Bitmap;)V&quot;, &quot;bitmap$delegate&quot;, &quot;LReflection/ReleasableNotNull;&quot;, &quot;onCreate&quot;, &quot;&quot;, &quot;onDestroy&quot;, &quot;Learning&quot;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-用途"><a href="#2-用途" class="headerlink" title="2. 用途"></a>2. 用途</h3><ul>
-<li>拿到类型的：属性、方法、内部类</li>
-<li>调用指定名称/签名的方法，或访问指定名称的属性（只要有类名 —&gt; 能拿到类 —&gt; 拿到类的属性、方法等等）</li>
-<li>通过签名信息获取泛型实参的具体类型（编译之后，泛型参数是要被擦除掉的，字节码中只有原始类型）</li>
-<li>访问运行时注解及其信息完成注入或者配置操作</li>
-</ul>
-<h3 id="3-反射常用数据结构"><a href="#3-反射常用数据结构" class="headerlink" title="3. 反射常用数据结构"></a>3. 反射常用数据结构</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>数据结构</th>
-<th>Java中对应结构</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>KType</td>
-<td>Type</td>
-<td>描述未擦除的类型或泛型参数，eg：Map<String, Int>。可通过typeOf或以下类型获取对应的父类、属性、函数参数等</td>
-</tr>
-<tr>
-<td>KClass</td>
-<td>Class</td>
-<td>描述对象的实际类型，不包含泛型参数，eg：Map；可通过对象、类型名直接获得</td>
-</tr>
-<tr>
-<td>KProperty</td>
-<td>Field</td>
-<td>描述属性，可通过属性引用、属性所在类的KClass获取</td>
-</tr>
-<tr>
-<td>KFunction</td>
-<td>Method</td>
-<td>描述函数，可通过函数引用、函数所在类的KClass获取</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="KType-amp-KClass"><a href="#KType-amp-KClass" class="headerlink" title="KType &amp; KClass:"></a>KType &amp; KClass:</h4><p>KType描述的就是我们直接使用的类型(Map<String, Int>)；KClass描述的是真实的类型(Map)，泛型擦除后的实际类型</p>
-<h4 id="KProperty-amp-Field："><a href="#KProperty-amp-Field：" class="headerlink" title="KProperty &amp; Field："></a>KProperty &amp; Field：</h4><p>KProperty 比 Field 更强大。Kotlin中 property = field + setter + getter</p>
-<h4 id="KFunction-amp-Method："><a href="#KFunction-amp-Method：" class="headerlink" title="KFunction &amp; Method："></a>KFunction &amp; Method：</h4><p>KFunction 既可以是顶级函数、也可以是类的方法函数。但Java中没有顶级函数概念，Method仅指类的方法</p>
-<h3 id="4-使用反射"><a href="#4-使用反射" class="headerlink" title="4. 使用反射"></a>4. 使用反射</h3><h4 id="Java反射："><a href="#Java反射：" class="headerlink" title="Java反射："></a>Java反射：</h4><ul>
-<li>Pros：在Kotlin中可以直接使用、并且无需引入额外依赖</li>
-<li>Cons：无法使用kotlin的语法特性，需对kotlin生成的字节码足够了解<h4 id="Kotlin反射："><a href="#Kotlin反射：" class="headerlink" title="Kotlin反射："></a>Kotlin反射：</h4></li>
-<li>Pros: 支持Kotlin中的几乎所有特性，API也更友好</li>
-<li>Cons: 需要添加 kotlin反射库 的引用，首次调用慢</li>
-</ul>
-<p><em>kotlin的反射信息是写在<code>@Metadata</code>里面的，所以首次调用有一个获取注解、反序列化信息的过程<br>（信息是通过protocol buffers序列化成二进制，写入到注解里)</em></p>
-<p>例子：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cls: KClass&lt;String&gt; = String::<span class="class"><span class="keyword">class</span> // <span class="title">kotlin</span> <span class="title">class</span></span></span><br><span class="line"><span class="keyword">var</span> clsJava = cls.java <span class="comment">// java class</span></span><br><span class="line">clsJava.kotlin <span class="comment">// back to kotlin class</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 只能拿到定义在该类当中的属性和方法，定义在外面的不行（扩展方法拿不到）</span></span><br><span class="line"><span class="keyword">val</span> property = cls.declaredMemberProperties.firstOrNull() <span class="comment">// KProperty1</span></span><br><span class="line"><span class="keyword">val</span> function = cls.declaredMemberFunctions.firstOrNull() <span class="comment">// KFunction1</span></span><br><span class="line"><span class="comment">// 但是定义在该类当中的 其他类的扩展方法可以拿到</span></span><br><span class="line"><span class="keyword">val</span> extensionFunction = cls.declaredMemberExtensionFunctions.firstOrNull()</span><br></pre></td></tr></table></figure><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> mapClass = Map::<span class="class"><span class="keyword">class</span> // <span class="title">KClass</span> 擦除后的类型本身</span></span><br><span class="line"><span class="keyword">val</span> mapType = typeOf&lt;Map&lt;String, <span class="built_in">Int</span>&gt;&gt;() <span class="comment">// KType 包含输入的泛型实参</span></span><br><span class="line">mapType.arguments.forEach &#123; </span><br><span class="line">    println(it) <span class="comment">// 可获取到泛型实参</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>输出为：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kotlin.String</span><br><span class="line">kotlin.Int</span><br></pre></td></tr></table></figure></p>
-<h4 id="KProperty-与-KFunction-类型："><a href="#KProperty-与-KFunction-类型：" class="headerlink" title="KProperty 与 KFunction 类型："></a>KProperty 与 KFunction 类型：</h4><ul>
-<li>如果没有receiver，类型为KProperty0 和 KFunction0</li>
-<li>如果有一个receiver，类型为KProperty1 和 KFunction1</li>
-<li>如果有两个receiver，类型为KProperty2 和 KFunction2</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
@@ -1037,7 +491,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

@@ -20,15 +20,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;zhuhanjiang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script>
-<meta name="description" content="Groovy 简介Gradle脚本使用的是Groovy语言，Groovy也是基于JVM的一种动态语言，基于Java并扩展了Java语言。Groovy会使写Java程序就要写脚本一样简单，写完就可以执行，所以看起来也像是一门脚本语言。Groovy内部会把代码编译为Java class文件然后启动虚拟机来执行，这些过程，我们开发人员是不用管的。 Gradle是一种DSL，也即是 Domain Spec">
+<meta name="description" content="概述Gradle是一个项目自动化构建开源工具，它通过组织执行一系列的Task来完成自动化的构建，减少构建项目时的复杂度。Android Studio也使用Gradle作为基础的构建工具。 Gradle自身是用Groovy和Java进行开发的，同时Gradle脚本使用基于Groovy的特定领域语言（DSL）来声明项目配置。Gradle是一种DSL（Domain Specific Language），">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gradle 学习笔记 （1）-- Groovy">
+<meta property="og:title" content="Android Gradle构建流程">
 <meta property="og:url" content="http://zhuhanjiang.github.io/gradle-learning-i/index.html">
 <meta property="og:site_name" content="Let&#39;s Study">
-<meta property="og:description" content="Groovy 简介Gradle脚本使用的是Groovy语言，Groovy也是基于JVM的一种动态语言，基于Java并扩展了Java语言。Groovy会使写Java程序就要写脚本一样简单，写完就可以执行，所以看起来也像是一门脚本语言。Groovy内部会把代码编译为Java class文件然后启动虚拟机来执行，这些过程，我们开发人员是不用管的。 Gradle是一种DSL，也即是 Domain Spec">
+<meta property="og:description" content="概述Gradle是一个项目自动化构建开源工具，它通过组织执行一系列的Task来完成自动化的构建，减少构建项目时的复杂度。Android Studio也使用Gradle作为基础的构建工具。 Gradle自身是用Groovy和Java进行开发的，同时Gradle脚本使用基于Groovy的特定领域语言（DSL）来声明项目配置。Gradle是一种DSL（Domain Specific Language），">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-21T11:01:00.000Z">
-<meta property="article:modified_time" content="2021-06-21T11:33:29.352Z">
+<meta property="article:modified_time" content="2021-06-24T04:19:57.286Z">
 <meta property="article:author" content="Joanne Jiang">
 <meta property="article:tag" content="gradle">
 <meta name="twitter:card" content="summary">
@@ -38,10 +38,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;zhuhanjiang.github.io&#x2F;gradle-learning-i&#x2F;&quot;,&quot;path&quot;:&quot;gradle-learning-i&#x2F;&quot;,&quot;title&quot;:&quot;gradle 学习笔记 （1）-- Groovy&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;zhuhanjiang.github.io&#x2F;gradle-learning-i&#x2F;&quot;,&quot;path&quot;:&quot;gradle-learning-i&#x2F;&quot;,&quot;title&quot;:&quot;Android Gradle构建流程&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>gradle 学习笔记 （1）-- Groovy | Let's Study</title><script src="/js/config.js"></script>
+<title>Android Gradle构建流程 | Let's Study</title><script src="/js/config.js"></script>
   
 
 
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Groovy-%E7%AE%80%E4%BB%8B"><span class="nav-text">Groovy 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Groovy%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">Groovy中的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#def%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-text">def关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#List"><span class="nav-text">List</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gradle%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90"><span class="nav-text">Gradle项目结构分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#settings-gradle"><span class="nav-text">settings.gradle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rootProject-build-gradle"><span class="nav-text">rootProject&#x2F;build.gradle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#module-build-gradle"><span class="nav-text">module&#x2F;build.gradle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gradle-properties"><span class="nav-text">gradle.properties</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#local-properties"><span class="nav-text">local.properties</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,20 +135,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -205,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          gradle 学习笔记 （1）-- Groovy
+          Android Gradle构建流程
         </h1>
 
         <div class="post-meta-container">
@@ -215,10 +215,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-06-21 19:01:00 / Modified: 19:33:29" itemprop="dateCreated datePublished" datetime="2021-06-21T19:01:00+08:00">2021-06-21</time>
+      <time title="Created: 2021-06-21 19:01:00" itemprop="dateCreated datePublished" datetime="2021-06-21T19:01:00+08:00">2021-06-21</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-24 12:19:57" itemprop="dateModified" datetime="2021-06-24T12:19:57+08:00">2021-06-24</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -239,17 +245,52 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Groovy-简介"><a href="#Groovy-简介" class="headerlink" title="Groovy 简介"></a>Groovy 简介</h3><p>Gradle脚本使用的是Groovy语言，Groovy也是基于JVM的一种动态语言，基于Java并扩展了Java语言。Groovy会使写Java程序就要写脚本一样简单，写完就可以执行，所以看起来也像是一门脚本语言。Groovy内部会把代码编译为Java class文件然后启动虚拟机来执行，这些过程，我们开发人员是不用管的。</p>
-<p>Gradle是一种DSL，也即是 Domain Specific Language 领域特定语言。说白了DSL就是一种行话，这个语言在Gradle中可以识别，在其它地方就用不了了。</p>
+        <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>Gradle是一个项目自动化构建开源工具，它通过组织执行一系列的Task来完成自动化的构建，减少构建项目时的复杂度。Android Studio也使用Gradle作为基础的构建工具。</p>
+<p>Gradle自身是用Groovy和Java进行开发的，同时Gradle脚本使用基于Groovy的特定领域语言（DSL）来声明项目配置。<br>Gradle是一种DSL（Domain Specific Language），领域特定语言。说白了DSL就是一种行话，这个语言在Gradle中可以识别，在其它地方就用不了了。</p>
 <p>学习Gradle，我们不必要精通Groovy语言，但还是需要了解一些Groovy的基本知识，比如def关键字、返回语句、字符串、集合、闭包等。下面，我们就来简单介绍一下。</p>
-<h3 id="Groovy中的字符串"><a href="#Groovy中的字符串" class="headerlink" title="Groovy中的字符串"></a>Groovy中的字符串</h3><p>Groovy支持多种字符串：单引号、双引号、三引号<br>单引号会直接打印字符串的内容，不会对’$’标注的内容进行转义<br>双引号可以使用’$’对变量 或 表达式进行转义<br>三引号可以支持字符串换行、保留字符串内的所有格式（和kotlin中的三引号功能类似）</p>
+<h4 id="Gradle项目结构分析"><a href="#Gradle项目结构分析" class="headerlink" title="Gradle项目结构分析"></a>Gradle项目结构分析</h4><p>新建一个Android工程，项目的结构大致如下：</p>
 <ul>
-<li>Groovy默认把 函数最后一行的执行结果 作为该函数的返回值，如果所需要的结果正好在最后一行、则可以省略return</li>
-<li>Groovy和很多动态语言一样，”;”并不是必要的，</li>
-<li>在Groovy中调用函数可以不加括号</li>
+<li>Project<ul>
+<li>.gradle</li>
+<li>.idea</li>
+<li>app<ul>
+<li>build</li>
+<li>libs</li>
+<li>src</li>
+<li>.gitignore</li>
+<li><strong>build.gradle</strong></li>
+<li>…</li>
 </ul>
-<h3 id="def关键字"><a href="#def关键字" class="headerlink" title="def关键字"></a>def关键字</h3><p>在定义变量或者方法的时候使用def。如果没有指定具体的参数类型，Groovy在运行时会自动判断类型。（def也可以省略，效果一样）<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> a = <span class="number">1</span>, b = <span class="number">2</span></span><br><span class="line"><span class="keyword">def</span> str = <span class="string">&quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以加上具体的类型</span></span><br><span class="line"><span class="keyword">def</span> <span class="keyword">int</span> a1 = <span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> String str1 = <span class="string">&quot;hello&quot;</span></span><br></pre></td></tr></table></figure><br>使用def定义方法的返回值类型，可以返回任意类型。当然如果指定了具体的返回值类型，就必须正确返回该类型的值</p>
-<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><p>作者：sososeen09<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0bde7097abaf">https://www.jianshu.com/p/0bde7097abaf</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</li>
+<li>gradle</li>
+<li>submodule</li>
+<li>.gitignore</li>
+<li><strong>build.gradle</strong></li>
+<li><strong>gradle.properties</strong></li>
+<li><strong>local.properties</strong></li>
+<li><strong>settings.gradle</strong></li>
+<li>… </li>
+</ul>
+</li>
+</ul>
+<h5 id="settings-gradle"><a href="#settings-gradle" class="headerlink" title="settings.gradle"></a>settings.gradle</h5><p>每个项目整体只有一个settings.gradle文件，是用于配置整个项目结构的脚本，对应的是Gradle中的<code>Settings</code>对象（Settings.java）。其常用方法有：</p>
+<ul>
+<li>include 依赖子工程</li>
+<li>includeFlat 依赖平级工程</li>
+<li>project 获取Project对象</li>
+</ul>
+<p>一般子模块的引用 都是在settings.gradle中添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include <span class="string">&#x27;:app&#x27;</span>, <span class="string">&#x27;:submodule&#x27;</span> <span class="comment">// 引用子模块</span></span><br><span class="line">project(<span class="string">&#x27;:app&#x27;</span>).projectDir = <span class="keyword">new</span> File(<span class="string">&quot;./...&quot;</span>) <span class="comment">// 指定子模块的目录位置</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="rootProject-build-gradle"><a href="#rootProject-build-gradle" class="headerlink" title="rootProject/build.gradle"></a>rootProject/build.gradle</h5><p>位于项目根目录下的build.gradle脚本，同样负责项目整体的配置，对应一个Project对象。常用方法有：</p>
+<ul>
+<li>buildscript 配置构建脚本</li>
+<li>repositories 配置仓库地址， 后面查找依赖的时候就按这个配置的顺序依次查找</li>
+<li>dependencies 配置项目的依赖项</li>
+<li>allprojects 所有项目的通用配置项</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123; <span class="comment">// 配置构建脚本</span></span><br><span class="line">    repositories &#123; <span class="comment">// 构建脚本的仓库</span></span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123; <span class="comment">// 构建脚本的依赖，默认依赖Android Gradle Plugin，也可以添加自定义的Plugin</span></span><br><span class="line">        classpath <span class="string">&#x27;com.android.tools.build:gradle:3.4.2&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">allproject &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="module-build-gradle"><a href="#module-build-gradle" class="headerlink" title="module/build.gradle"></a>module/build.gradle</h5><p>位于子模块的build.gradle脚本，负责这个模块的配置。也对应一个Project对象，类似根目录的build.gradle。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入Android Gradle Plugin；如果是library，引入&#x27;com.android.library&#x27;</span></span><br><span class="line">apply <span class="attr">plugin:</span> <span class="string">&#x27;com.android.application&#x27;</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    <span class="comment">// 配置编译相关的内容</span></span><br><span class="line">    compileSdkVersion <span class="number">29</span></span><br><span class="line">    buildToolsVersion <span class="string">&quot;29.0.2&quot;</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.joanne.gradledemo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">23</span></span><br><span class="line">        targetSdkVersion <span class="number">29</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 根据编译类型（Debug/Release）来配置一些编译属性</span></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">&#x27;proguard-android-optimize.txt&#x27;</span>), <span class="string">&#x27;proguard-rules.pro&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// 添加模块相关的依赖</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="gradle-properties"><a href="#gradle-properties" class="headerlink" title="gradle.properties"></a>gradle.properties</h5><p>gradle全局的统一配置，key-value配置，用于配置例如守护进程开关，aapt2开关，jvm参数和一些自定义的通用函数，需要上传到仓库</p>
+<h5 id="local-properties"><a href="#local-properties" class="headerlink" title="local.properties"></a>local.properties</h5><p>和gradle.propertiies类似，主要是一些本地化的配置，像工程里需要源码依赖的模块，或者一些安全性较高的仓库账号密码</p>
 
     </div>
 
